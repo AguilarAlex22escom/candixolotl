@@ -1,0 +1,14 @@
+CREATE DATABASE axolotl IF NOT EXISTS;
+
+USE axolotl;
+
+CREATE TABLE users(
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    first_names VARCHAR(25) NOT NULL,
+    last_names VARCHAR(25) NOT NULL,
+    birth_date VARCHAR(10) NOT NULL,
+    user_name VARCHAR(35) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    psw VARCHAR(30) NOT NULL,
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

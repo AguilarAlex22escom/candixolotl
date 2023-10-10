@@ -1,0 +1,15 @@
+.menu {
+  background-color: blue;
+  &.actived {
+    background-color: rgb(1, 151, 151);
+  }
+}
+
+.menuButton {
+  background-color: chartreuse;
+  cursor: pointer;
+  &.actived {
+    background-color: blueviolet;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,18 @@
+.settings {
+  background-color: burlywood;
+  &.actived {
+    background-color: cyan;
+  }
+}
+
+.optionsSelect {
+  display: none;
+  &.actived {
+    background-color: blueviolet;
+    display: inline-block;
+  }
+}
+
+.translateIdioms {
+  background-color: blanchedalmond;
+}
