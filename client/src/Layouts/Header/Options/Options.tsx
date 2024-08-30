@@ -1,26 +1,19 @@
-"use client";
-
-import lightMode from "@/Icons/light-mode.png";
-import darkMode from "@/Icons/dark-mode.png";
+import {FC, useState, useRef} from "react"
+import clsx from 'clsx'
+import lightModeIcon from "@/Icons/header/light_mode.png"
+import darkModeIcon from "@/Icons/header/dark_mode.png"
 import spanish from "@/Icons/spanish.png";
 import english from "@/Icons/english.png";
-import { FC, useState, useRef } from "react";
-import clsx from "clsx";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMoon,
-  faSun,
-  faGear,
-  faChevronDown,
-  faPlus,
-  faMinus,
-  faTextHeight,
-} from "@fortawesome/free-solid-svg-icons";
-import styles from "@/Styles/Layout/Header/options.module.scss";
 
-const { settings, optionsSelect, optionsTranslate, translateIdioms, actived } =
-  styles;
+import {
+    FaGear,
+    FaChevronDown,
+    FaPlus,
+    FaMinus,
+    FaTextHeight
+} from "react-icons/fa6"
+
+const settings = '', optionsSelect = '', optionsTranslate = '', translateIdioms = '', actived = ''
 
 const Options: FC = () => {
   let settingsRef = useRef<HTMLUListElement>(null);
@@ -37,10 +30,8 @@ const Options: FC = () => {
   return (
     <>
       <div className="mode">
-        <Image src={lightMode} alt="light-mode" />
-        <Image src={darkMode} alt="dark-mode" />
-        {/*<FontAwesomeIcon icon={faMoon} />
-            <FontAwesomeIcon icon={faSun} />*/}
+        <img src={lightModeIcon} alt="light-mode" />
+        <img src={darkModeIcon} alt="dark-mode" />
       </div>
       <div
         className={
@@ -48,9 +39,9 @@ const Options: FC = () => {
         }
         onClick={toggleSettings}
       >
-        <FontAwesomeIcon icon={faGear} />
+        <FaGear />
         <p>Ajustes</p>
-        <FontAwesomeIcon icon={faChevronDown} />
+        <FaChevronDown />
       </div>
       <ul ref={settingsRef} className={optionsSelect}>
         <li className={optionsTranslate}>
@@ -58,18 +49,17 @@ const Options: FC = () => {
         </li>
         <ul className={translateIdioms}>
           <li>
-            <Image src={spanish} alt="spanish" />
+            <img src={spanish} alt="spanish" />
             <p>Spanish</p>
           </li>
           <li>
-            <Image src={english} alt="english" />
+            <img src={english} alt="english" />
             <p>English</p>
           </li>
         </ul>
         <li>
           <div>
-            <FontAwesomeIcon
-              icon={faPlus}
+            <FaPlus
               onClick={() => {
                 if (widthTextButton < 4) {
                   setWidthTextButton((widthTextButton += 1));
@@ -77,8 +67,7 @@ const Options: FC = () => {
                 }
               }}
             />
-            <FontAwesomeIcon
-              icon={faMinus}
+            <FaMinus
               onClick={() => {
                 if (widthTextButton > 0) {
                   setWidthTextButton((widthTextButton -= 1));
@@ -87,10 +76,11 @@ const Options: FC = () => {
               }}
             />
           </div>
-          <FontAwesomeIcon icon={faTextHeight} />
+          <FaTextHeight />
         </li>
       </ul>
     </>
-  );
-};
-export default Options;
+  )
+}
+
+export default Options

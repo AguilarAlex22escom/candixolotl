@@ -10,6 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+"""
+admin: MarcAguilar22
+email: ramirezaguilarmarcalexander@gmail.com
+password: Ipn2021630630
+"""
+
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +33,7 @@ SECRET_KEY = "django-insecure-$08de^gu3pz%4%x#qve9=-z#gw^_o4)vzyyw_ucqovcz0ta0vg
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# APPEND_SLASH = False
 
 # Application definition
 
@@ -37,11 +44,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "mainapp",
+    "rest_framework",
+    "rest_framework.authtoken",
+    "corsheaders",
+    "coreapi",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -69,17 +82,35 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "server.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Running localy
+'''
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "candixolotl",
+        "USER": "root",
+        "PASSWORD": "Ipn2021630630-2024",
+        "HOST": "localhost",
+        "PORT": "3306",
+        # "NAME": BASE_DIR / "db.sqlite3",
+    }
+} 
+'''
+
+# With Clever cloud database
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "bohztsmvx4xilvimehv6",
+        "USER": "uzdxsoajc3yxoufb",
+        "PASSWORD": "abqsqENRXOZZj0LNbAuw",
+        "HOST": "bohztsmvx4xilvimehv6-mysql.services.clever-cloud.com",
+        "PORT": "3306"
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -99,6 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTH_USER_MODEL = "mainapp.Customer"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -115,9 +147,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+}
+
+# CORS Settings
+
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:8000", "http://localhost:5173"]
+
+CORS_ALLOWED_CREDENTIALS = True

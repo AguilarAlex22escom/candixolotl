@@ -1,39 +1,25 @@
-import { FC } from "react";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBook,
-  faHouse,
-  faIdCard,
-  faChevronDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { FaBook, FaHouse, FaIdCard, FaChevronDown } from "react-icons/fa6";
+import { navBarStyles, navBarOptionStyles } from "@/Styles/layouts/header";
 
-const NavBar: FC = () => {
+const NavBar = () => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link href={"/"}>
-            <FontAwesomeIcon icon={faHouse} />
-            <p>Inicio</p>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </Link>
-        </li>
-        <li>
-          <Link href={"Pages/catalogue"}>
-            <FontAwesomeIcon icon={faBook} />
-            <p>Catálogo</p>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </Link>
-        </li>
-        <li>
-          <Link href={"Pages/about"}>
-            <FontAwesomeIcon icon={faIdCard} />
-            <p>Acerca de nosotrxs</p>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </Link>
-        </li>
-      </ul>
+    <nav className={navBarStyles}>
+      <Link to="/" className={navBarOptionStyles}>
+        <FaHouse />
+        <p>Inicio</p>
+        <FaChevronDown />
+      </Link>
+      <Link to="/" className={navBarOptionStyles}>
+        <FaBook />
+        <p>Catálogo</p>
+        <FaChevronDown />
+      </Link>
+      <Link to="/" className={navBarOptionStyles}>
+        <FaIdCard />
+        <p>Acerca de nosotrxs</p>
+        <FaChevronDown />
+      </Link>
     </nav>
   );
 };

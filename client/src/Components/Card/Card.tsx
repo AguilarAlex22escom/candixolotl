@@ -1,15 +1,25 @@
-import { cType, cClass, cMode } from "@/Types/LogIn/types";
-import { FC, HTMLProps, ReactNode } from "react";
+import { FC } from "react";
+import clsx from "clsx";
+// import { alpha, styled } from "@mui/material/styles";
+import { Card as MUICard } from "@mui/material";
+// import { CardProps as MUICardProps } from "@mui/material/Card";
+import CardProps from "@/Interfaces/CardProps";
+import { InformativeStyles, SessionStyles } from "@/Styles/components/Card";
 
-interface CardProps extends HTMLProps<HTMLDivElement> {
-  children: ReactNode;
-  cType?: cType;
-  cClass?: cClass;
-  cMode?: cMode;
-}
-
-const Card: FC<CardProps> = ({ children, cType, cClass, cMode }: CardProps) => {
-  return <div>{children}</div>;
+const Card: FC<CardProps> = ({
+  cardType,
+  cardClass,
+  cardUIMode,
+  children,
+}: CardProps) => {
+  return (
+    <MUICard
+      sx={cardClass == "Informative" ? InformativeStyles : SessionStyles}
+      className={clsx(cardType, cardClass, cardUIMode)}
+    >
+      {children}
+    </MUICard>
+  );
 };
 
 export default Card;

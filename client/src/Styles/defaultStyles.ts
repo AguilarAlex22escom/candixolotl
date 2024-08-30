@@ -1,0 +1,11 @@
+export const guinda: string = "#800040";
+export const wine: string = "#401028";
+export const yellow: string = "#F4FB27";
+export const blue: string = "#289CFA";
+export const purple: string = "#2A0044";
+export const tobaco: string = "#19191C";
+export const caoba: string = "#161412";
+export const snow: string = "#FFF9FB";
+export const font: string = "'Comfortaa', sans-serif";
+export const glasmorphismBorderOne: string = `1px solid rgba(255, 249, 251, 0.2)`;
+export const glasmorphismBorderTwo: string = `1px solid rgba(255, 249, 251, 0.1)`;
