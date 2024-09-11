@@ -6,7 +6,7 @@ from .models import Customer, Product
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "first_name", "last_name", "username", "password"]
+        fields = ["id", "username", "first_name", "last_name", "password"]
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:

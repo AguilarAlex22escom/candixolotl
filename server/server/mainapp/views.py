@@ -56,7 +56,8 @@ def login(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def profile(request):
-    serializer = CustomerSerializer(instance=request.data)
+    user = request.user
+    serializer = CustomerSerializer(instance=user)
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 @api_view(["POST"])

@@ -1,24 +1,25 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { FaCircleXmark } from "react-icons/fa6";
 import SignUpForm from "@/Components/Forms/SignUpForm";
 import Card from "@/Components/Card/Card";
 import HRTag from "@/Components/HR/HRTag";
 import Button from "@/Components/Button/Button";
 import GoogleLogo from "@/Icons/google-logo.png";
 import FaceBookLogo from "@/Icons/facebook-logo.png";
-
-const signUp = "",
-  /* signUpHR = "", */
-  signUpSocialNetwork = "",
-  logIn = "";
+import { snow, blue, font, StyledRedirect } from "@/Styles/defaultStyles";
 
 const SignUp: FC = () => {
   return (
-    <div className={signUp}>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Card cardType="Sign up" cardClass="Session" cardUIMode="Light">
-        <FaCircleXmark />
         <SignUpForm />
+        {/**
         <HRTag
           firstChildren={<p>O</p>}
           lastChildren={<p>Registrese con su: </p>}
@@ -41,11 +42,21 @@ const SignUp: FC = () => {
             <img src={FaceBookLogo} alt="Facebook-Auth" />
             <p>Cuenta de Facebook</p>
           </Button>
-        </div>
+        </div>       
+        */}
         <HRTag hrUIMode="Light" />
-        <div className={logIn}>
-          <p>¿Ya tiene cuenta con nosotrxs?</p>
-          <Link to={"/log-in"}>Inicie sesión aquí.</Link>
+        <div
+          style={{
+            color: snow,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            fontFamily: font,
+          }}
+        >
+          <p>¿Ya tienes cuenta con nosotrxs?</p>
+          <StyledRedirect to={"/log-in"}>Inicia sesión aquí.</StyledRedirect>
         </div>
       </Card>
     </div>

@@ -2,15 +2,20 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import useSignUpForm from "@/Hooks/useSignUpForm.hook";
 
-const signUpPlatform = "";
-
 const SignUpForm = () => {
-
   const { submission, control, errors } = useSignUpForm();
 
   return (
-    <div className={signUpPlatform}>
-      <form onSubmit={submission}>
+    <div>
+      <form
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        onSubmit={submission}
+      >
         <Input
           inputType="text"
           inputClass="Session"
@@ -18,6 +23,7 @@ const SignUpForm = () => {
           inputLabel="Nombre(s)"
           name="first_name"
           control={control}
+          disabled={false}
           errors={errors}
         />
         <Input
@@ -27,6 +33,7 @@ const SignUpForm = () => {
           inputLabel="Apellidos"
           name="last_name"
           control={control}
+          disabled={false}
           errors={errors}
         />
         {/*<Input
@@ -53,6 +60,7 @@ const SignUpForm = () => {
           inputLabel="Correo electrónico"
           name="username"
           control={control}
+          disabled={false}
           errors={errors}
         />
         <Input
@@ -63,16 +71,18 @@ const SignUpForm = () => {
           isPassword={true}
           name="password"
           control={control}
+          disabled={false}
           errors={errors}
         />
-        <Button
-          buttonType="Sign up"
-          buttonClass="Session"
-          buttonUIMode="Light"
-          type="submit"
-        >
-          Registrar
-        </Button>
+        <div style={{ margin: "24px 0 12px" }}>
+          <Button
+            buttonType="Turn back"
+            buttonUIMode="Light"
+            type="submit"
+          >
+            Regístrate
+          </Button>
+        </div>
       </form>
     </div>
   );

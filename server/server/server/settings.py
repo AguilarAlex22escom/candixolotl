@@ -17,6 +17,7 @@ password: Ipn2021630630
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,12 +28,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-$08de^gu3pz%4%x#qve9=-z#gw^_o4)vzyyw_ucqovcz0ta0vg"
+# SECRET_KEY = "django-insecure-$08de^gu3pz%4%x#qve9=-z#gw^_o4)vzyyw_ucqovcz0ta0vg"
+SECRET_KEY = os.environ.get("SECRET_KEYSECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 # APPEND_SLASH = False
 
 # Application definition
@@ -60,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "server.urls"
@@ -86,7 +93,7 @@ WSGI_APPLICATION = "server.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # Running localy
-'''
+"""
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
@@ -98,7 +105,18 @@ DATABASES = {
         # "NAME": BASE_DIR / "db.sqlite3",
     }
 } 
-'''
+"""
+
+"""
+{
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "bohztsmvx4xilvimehv6",
+        "USER": "uzdxsoajc3yxoufb",
+        "PASSWORD": "abqsqENRXOZZj0LNbAuw",
+        "HOST": "bohztsmvx4xilvimehv6-mysql.services.clever-cloud.com",
+        "PORT": "3306"
+    }
+"""
 
 # With Clever cloud database
 DATABASES = {
@@ -108,8 +126,8 @@ DATABASES = {
         "USER": "uzdxsoajc3yxoufb",
         "PASSWORD": "abqsqENRXOZZj0LNbAuw",
         "HOST": "bohztsmvx4xilvimehv6-mysql.services.clever-cloud.com",
-        "PORT": "3306"
-    }
+        "PORT": "3306",
+    },
 }
 
 # Password validation
@@ -149,6 +167,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
@@ -161,7 +183,7 @@ REST_FRAMEWORK = {
 }
 
 # CORS Settings
-
+# e61wkTBXWI SECRETE KEY
 CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:8000", "http://localhost:5173"]
 
 CORS_ALLOWED_CREDENTIALS = True

@@ -1,4 +1,5 @@
 import { HTMLProps } from "react";
+import { TextFieldProps } from "@mui/material";
 import {
   inputType,
   inputClass,
@@ -17,5 +18,7 @@ export default interface InputProps extends HTMLProps<HTMLInputElement> {
   isPassword?: isPassword;
   control?: Control<any>;
   errors?: FormState<SignUpData>;
+  multiline?: boolean;
+  disabled?: boolean;
   name: string;
 }

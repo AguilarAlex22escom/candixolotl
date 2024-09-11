@@ -1,6 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+body {
+  background-color: #161412;
+}
+
+p,
+h1,
+h2 {
+  font-family: "Comfortaa", sans-serif;
+}
 
 p {
-    font-family: "Comfortaa", sans-serif;
-    font-weight: 400;
+  font-weight: 400;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: 600;
 }

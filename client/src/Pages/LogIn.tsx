@@ -1,34 +1,44 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaCircleXmark } from "react-icons/fa6";
 import useLogInForm from "@/Hooks/useLogInForm.hook";
 import Card from "@/Components/Card/Card";
 import HRTag from "@/Components/HR/HRTag";
 import Input from "@/Components/Input/Input";
 import Button from "@/Components/Button/Button";
+import { snow, font, StyledRedirect } from "@/Styles/defaultStyles";
 
-const logIn = "",
-  logInPlatform = "",
-  signUp = "";
+const signUp = "";
 // const logInTitle = "Iniciar sesión";
 
 const LogIn: FC = () => {
-
-  const {submission, control} = useLogInForm()
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const { submission, control } = useLogInForm();
 
   return (
-    <div className={logIn}>
-      <Card>
-        <FaCircleXmark />
-        <div className={logInPlatform}>
-          <form onSubmit={submission}>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Card cardType="Log In">
+        <div>
+          <form
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onSubmit={submission}
+          >
             <Input
               inputType="email"
               inputClass="Session"
               inputUIMode="Light"
               inputLabel="Correo electrónico"
               name="username"
+              disabled={false}
               control={control}
             />
             <Input
@@ -37,15 +47,29 @@ const LogIn: FC = () => {
               inputUIMode="Light"
               inputLabel="Contraseña"
               name="password"
+              disabled={false}
               control={control}
             />
-            <Button type="submit">Iniciar sesión</Button>
+            <div style={{ margin: "24px 0 12px" }}>
+              <Button buttonType="Buy" type="submit">
+                Inicia sesión
+              </Button>
+            </div>
           </form>
         </div>
         <HRTag />
-        <div className={signUp}>
-          <p>Aún no tiene cuenta con nosotrxs?</p>
-          <Link to={"/sign-up"}>Registrate aquí.</Link>
+        <div
+          style={{
+            color: snow,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            fontFamily: font,
+          }}
+        >
+          <p>¿Aún no tiene cuenta con nosotrxs?</p>
+          <StyledRedirect to={"/sign-up"}>Regístrate aquí.</StyledRedirect>
         </div>
       </Card>
     </div>

@@ -1,37 +1,27 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getProfile } from "@/api/customers.api";
 import SignUpData from "@/Interfaces/SignUpData";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 
 const useGetProfile = () => {
-  const { handleSubmit, control } = useForm<SignUpData>({
-    defaultValues: {
-        first_name: "",
-        last_name: "",
-        username: "",
-        password: ""
-    }
-  });
-  const [user, setUser] = useState<SignUpData | null>(null)
+  const navigate = useNavigate();
+  const [userProfile, setUserProfile] = useState<SignUpData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit: SubmitHandler<SignUpData> = async (data) => {
-    try {
-      console.log(data)
-      const response = await getProfile(data);
-      response != 0 ? (
-        setUser(response.data),
-        localStorage.setItem("user", JSON.stringify(response.data)),
-        console.log(response.data)
-      ) : alert("No se pudieron obtener los datos de perfil...")
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await getProfile();
+        setUserProfile(response);
+      }
+      catch(err: any) {
+        setError(err.message);
+        if(err.response?.status == 401) navigate("/login");
+      }
     }
-    catch(err) {
-      console.log(`The errors in the profile were: ${err}`)
-    }
-  };
-
-  const submission = handleSubmit(onSubmit);
-
-  return { submission, control, user };
+    fetchProfile();
+  }, [navigate]);
+  return { userProfile, error }
 };
 
 export default useGetProfile;

@@ -2,6 +2,8 @@ import API from "./main.api";
 import SignUpData from "@/Interfaces/SignUpData";
 import LogInData from "@/Interfaces/LogInData";
 
+const token = localStorage.getItem("tokenAuth");
+
 export const postCustomer = async (data: SignUpData) => {
   try {
     const response = await API.post("signup/", data);
@@ -20,9 +22,16 @@ export const getCustomer = async (data: LogInData) => {
   }
 };
 
-export const getProfile = async (data: SignUpData) => {
+export const getProfile = async () => {
   try {
-    const response = await API.post("profile/", data);
+    if(!token) {
+      throw new Error("El usuario no se ha autenticado.");
+    }
+    const response = await API.post("profile/", {}, {
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    });
     return response.data;
   } catch (err) {
     console.log(`The error in the profile was: ${err}`);

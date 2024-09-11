@@ -1,2 +1,4 @@
 /client/node_modules
 /server/venv
+/server/server/candixolotl.sql
+/server/server/candixolotl.mwb

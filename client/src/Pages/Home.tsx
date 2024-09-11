@@ -1,14 +1,20 @@
-import { useState } from "react";
-// import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { CardContent, CardMedia, CardActions } from "@mui/material/";
+import Skeleton from "@mui/material/Skeleton";
 import useGetProducts from "@/Hooks/useGetProducts.hook";
+import CartManager from "@/Components/CartManager/CartManager";
 import Card from "@/Components/Card/Card";
 import Button from "@/Components/Button/Button";
-import AdderSubstracter from "@/Components/AdderSubstracter/AdderSubstracter";
 import ProductsData from "@/Interfaces/ProductsData";
+import { blue, guinda } from "@/Styles/defaultStyles";
 import { StyledMain } from "@/Styles/pages/home";
-import { CardH1, CardH2 } from "@/Styles/components/Card";
+import {
+  CardH1,
+  CardH2,
+  StyledCardActions,
+  StyledCardActionsDiv,
+} from "@/Styles/components/Card";
 
 const Home = () => {
   const products: ProductsData[] = useGetProducts();
@@ -24,12 +30,11 @@ const Home = () => {
 
   return (
     <>
-      {/*<Helmet>
-        <meta charSet="utf-8" />
-        <title>Bienvenidx a AIcholotl!</title>
-      </Helmet>*/}
+      <Helmet>
+        <title>AIcholotl</title>
+      </Helmet>
       <StyledMain className="home">
-        <h1>¡Conoce nuestros nuevos productos para deleitar tu paladar!</h1>
+        <h1>¡Conoce nuestros nuevos productos!</h1>
         {products.length > 0 ? (
           products.map((product: ProductsData) => (
             <Card cardClass="Informative" key={product.id}>
@@ -43,34 +48,89 @@ const Home = () => {
               <CardContent>
                 <CardH1>{product.name}</CardH1>
                 <CardH2>{product.brand}</CardH2>
-                <p>
-                  <strong>Precio:</strong> ${product.price} varos.
-                </p>
-                <p>
-                  <strong>Piezas disponibles:</strong> {product.units} piezas
-                </p>
-                <p>{product.kind}</p>
+                <p>${product.price} varos</p>
+                <p>{product.units} piezas aún disponibles</p>
               </CardContent>
-              <CardActions sx={{ display: "flex", flexDirection: "column" }}>
-                <Button
-                  onClick={() =>
-                    getProductDetails(
-                      product.kind,
-                      product.name,
-                      product.serie,
-                      product.id
-                    )
-                  }
-                >
-                  Ver más
-                </Button>
-                <Button>Añadir al carrito</Button>
-                <AdderSubstracter limit={product.units} />
+              <CardActions sx={StyledCardActions}>
+                <StyledCardActionsDiv>
+                  <Button
+                    buttonClass="Sale"
+                    onClick={() =>
+                      getProductDetails(
+                        product.kind,
+                        product.name,
+                        product.serie,
+                        product.id
+                      )
+                    }
+                  >
+                    Ver más
+                  </Button>
+                  <CartManager {...product} />
+                </StyledCardActionsDiv>
               </CardActions>
             </Card>
           ))
         ) : (
-          <p>No products found</p>
+          <>
+            <Card>
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                variant="rectangular"
+                width={360}
+                height={200}
+              />
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                width={360}
+                height={160}
+              />
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                variant="rectangular"
+                width={360}
+                height={200}
+              />
+            </Card>
+            <Card>
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                variant="rectangular"
+                width={360}
+                height={200}
+              />
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                width={360}
+                height={160}
+              />
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                variant="rectangular"
+                width={360}
+                height={200}
+              />
+            </Card>
+            <Card>
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                variant="rectangular"
+                width={360}
+                height={200}
+              />
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                width={360}
+                height={160}
+              />
+              <Skeleton
+                sx={{ backgroundColor: blue }}
+                variant="rectangular"
+                width={360}
+                height={200}
+              />
+            </Card>
+          </>
         )}
       </StyledMain>
     </>

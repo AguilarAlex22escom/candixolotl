@@ -1,51 +1,61 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import { FaShoppingCart } from "react-icons/fa";
-// import Options from "./Options/Options";
 import Button from "@/Components/Button/Button";
 import NavBar from "./NavBar/NavBar";
-import logo from "@/Images/logo.png";
+import logo from "@/Images/aicholotlWeb.png";
+import { StyledHeaderColors } from "@/Styles/layouts/header";
 // import { FaBars } from "react-icons/fa6";
 import { headerStyles } from "@/Styles/layouts/header";
 import useLogoutCustomer from "@/Hooks/useLogoutCustomer.hook";
-// import useToggleResponsiveMenu from "@/Hooks/Layout/useToggleResponsiveMenu";
+import useGetProfile from "@/Hooks/useGetProfile.hook";
 
 const Header: FC = () => {
-  // const [cart, setCart] = useState<number>(0);
-  // const cart = localStorage.getItem("cart_value")!
-  const token = localStorage.getItem("tokenAuth");
-  const cartValue = parseInt(localStorage.getItem("cart_value")!);
+  const [cart, setCart] = useState<number>(0);
+  const { userProfile, error } = useGetProfile();
 
-  // setCart(parseInt(cartValue))
+  useEffect(() => {
+    const cartValue = parseInt(localStorage.getItem("cart_value")!);
+    setCart(cartValue || 0);
+  }, []);
 
   return (
-    <header className={headerStyles}>
+    <header className={headerStyles} style={StyledHeaderColors}>
       <NavBar />
-      <img src={logo} alt="CandIxolotl" className="w-20" />
-      {/*<Options />*/}
-      {!token ? (
+      <Link to="/">
+        <img src={logo} alt="AIcholotl" className="w-20" />
+      </Link>
+      {!userProfile || error ? (
         <Link to="/sign-up">
           <Button
-            buttonClass="Session"
-            buttonType="Sign up"
+            buttonType="Buy"
             buttonUIMode="Light"
           >
-            Registrate
+            Regístrate
           </Button>
         </Link>
       ) : (
-        <div>
-          <h1>Usuario iniciado.</h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "40%",
+          }}
+        >
+          <h1>Hola de vuelta {userProfile.first_name} </h1>
           <Link to="/cart">
-            <Button>
-              <Badge color="warning" badgeContent={cartValue}>
+            <Button buttonType="Buy">
+              <Badge color="warning" badgeContent={cart}>
                 <FaShoppingCart />
               </Badge>
             </Button>
           </Link>
           <Link to="/">
-            <Button onClick={() => useLogoutCustomer()}>Cerrar sesión</Button>
+            <Button buttonType="Buy" onClick={() => useLogoutCustomer()}>
+              Cerrar sesión
+            </Button>
           </Link>
         </div>
       )}

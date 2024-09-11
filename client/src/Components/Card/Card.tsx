@@ -4,7 +4,11 @@ import clsx from "clsx";
 import { Card as MUICard } from "@mui/material";
 // import { CardProps as MUICardProps } from "@mui/material/Card";
 import CardProps from "@/Interfaces/CardProps";
-import { InformativeStyles, SessionStyles } from "@/Styles/components/Card";
+import {
+  InformativeStyles,
+  SaleStyles,
+  SessionStyles,
+} from "@/Styles/components/Card";
 
 const Card: FC<CardProps> = ({
   cardType,
@@ -14,7 +18,13 @@ const Card: FC<CardProps> = ({
 }: CardProps) => {
   return (
     <MUICard
-      sx={cardClass == "Informative" ? InformativeStyles : SessionStyles}
+      sx={
+        cardClass == "Informative"
+          ? InformativeStyles
+          : cardClass == "Sale"
+          ? SaleStyles
+          : SessionStyles
+      }
       className={clsx(cardType, cardClass, cardUIMode)}
     >
       {children}
